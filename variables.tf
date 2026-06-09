@@ -77,6 +77,17 @@ variable "private_endpoint" {
   })
   default = null
 }
+variable "enable_diagnostic_settings" {
+  description = <<-EOT
+    Whether to create the diagnostic setting. When null (the default),
+    creation is derived from whether diagnostic_log_analytics_workspace_id
+    is set. Set this explicitly to true/false when the workspace ID is
+    computed (e.g. another module's output) and therefore unknown at
+    plan time, so Terraform can determine the resource count.
+  EOT
+  type        = bool
+  default     = null
+}
 
 variable "diagnostic_log_analytics_workspace_id" {
   description = "Optional Log Analytics workspace ID. When set, a diagnostic setting is created."

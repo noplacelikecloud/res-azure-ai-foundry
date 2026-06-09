@@ -63,7 +63,7 @@ resource "azurerm_private_endpoint" "this" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "this" {
-  count = var.diagnostic_log_analytics_workspace_id == null ? 0 : 1
+  count = (var.enable_diagnostic_settings != null ? var.enable_diagnostic_settings : var.diagnostic_log_analytics_workspace_id != null) ? 1 : 0
 
   name                       = "${var.name}-diag"
   target_resource_id         = azurerm_cognitive_account.this.id
